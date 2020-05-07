@@ -1,80 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gamesmap;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author evand
  */
 public class Info {
-    
-    private String name;
-    private String platform;
-    private String rating;
-    private BigDecimal score;
-    private String genre;
-    private String recommended;
-    private Integer yearOfRelease;
 
-    public Info() {}
+    public int number_reviews;
+    public int number_mediocre;
+    public int number_action;
+    public double percent_mediocre;
+    public double total_scores;
+    public ArrayList<Double> list_scores;
+    public String best_game;
+    public Double best_score;
+    public String worst_game;
+    public Double worst_score;
 
-    public String getName() {
-        return name;
+    public Info() {
+        this.list_scores = new ArrayList<>();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public double getMeanScores() {
+        return this.total_scores / this.number_reviews;
     }
 
-    public String getPlatform() {
-        return platform;
+    public double getScoresStdDeviation() {
+        double sum = 0;
+        double stdDeviation = 0;
+        int size = this.list_scores.size();
+        for (Double d : this.list_scores) {
+            stdDeviation += Math.pow(d - this.getMeanScores(), 2);
+        }
+        return Math.sqrt(stdDeviation / size);
     }
-
-    public void setPlatform(String platform) {
-        this.platform = platform;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    public BigDecimal getScore() {
-        return score;
-    }
-
-    public void setScore(BigDecimal score) {
-        this.score = score;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getRecommended() {
-        return recommended;
-    }
-
-    public void setRecommended(String recommended) {
-        this.recommended = recommended;
-    }
-
-    public Integer getYearOfRelease() {
-        return yearOfRelease;
-    }
-
-    public void setYearOfRelease(Integer yearOfRelease) {
-        this.yearOfRelease = yearOfRelease;
-    }
-    
 }
